@@ -1,0 +1,86 @@
+Step 3 - Exploratory Data Analysis (EDA)
+Dataset loaded successfully.
+
+Dataset shape:
+(53940, 10)
+
+Missing values in each column:
+carat      0
+cut        0
+color      0
+clarity    0
+depth      0
+table      0
+price      0
+x          0
+y          0
+z          0
+dtype: int64
+
+Number of duplicate rows:
+146
+
+Descriptive statistics for numerical columns:
+              carat         depth  ...             y             z
+count  53940.000000  53940.000000  ...  53940.000000  53940.000000
+mean       0.797940     61.749405  ...      5.734526      3.538734
+std        0.474011      1.432621  ...      1.142135      0.705699
+min        0.200000     43.000000  ...      0.000000      0.000000
+25%        0.400000     61.000000  ...      4.720000      2.910000
+50%        0.700000     61.800000  ...      5.710000      3.530000
+75%        1.040000     62.500000  ...      6.540000      4.040000
+max        5.010000     79.000000  ...     58.900000     31.800000
+
+[8 rows x 7 columns]
+
+Summary for categorical columns:
+There are no categorical columns.
+
+Feature distribution plots were saved.
+
+Correlation matrix:
+          carat     depth     table     price         x         y         z
+carat  1.000000  0.028224  0.181618  0.921591  0.975094  0.951722  0.953387
+depth  0.028224  1.000000 -0.295779 -0.010647 -0.025289 -0.029341  0.094924
+table  0.181618 -0.295779  1.000000  0.127134  0.195344  0.183760  0.150929
+price  0.921591 -0.010647  0.127134  1.000000  0.884435  0.865421  0.861249
+x      0.975094 -0.025289  0.195344  0.884435  1.000000  0.974701  0.970772
+y      0.951722 -0.029341  0.183760  0.865421  0.974701  1.000000  0.952006
+z      0.953387  0.094924  0.150929  0.861249  0.970772  0.952006  1.000000
+
+Relationship plots were saved.
+
+Average price by cut:
+cut
+Premium      4584.257704
+Fair         4358.757764
+Very Good    3981.759891
+Good         3928.864452
+Ideal        3457.541970
+Name: price, dtype: float64
+
+Average price by color:
+color
+J    5323.818020
+I    5091.874954
+H    4486.669196
+G    3999.135671
+F    3724.886397
+D    3169.954096
+E    3076.752475
+Name: price, dtype: float64
+
+Average price by clarity:
+clarity
+SI2     5063.028606
+SI1     3996.001148
+VS2     3924.989395
+I1      3924.168691
+VS1     3839.455391
+VVS2    3283.737071
+IF      2864.839106
+VVS1    2523.114637
+Name: price, dtype: float64
+
+Rows with zero values in x, y, or z:
+20
