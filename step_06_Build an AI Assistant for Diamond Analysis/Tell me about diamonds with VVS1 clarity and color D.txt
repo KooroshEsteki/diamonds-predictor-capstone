@@ -1,0 +1,16 @@
+Question: Tell me about diamonds with VVS1 clarity and color D.
+
+I found diamonds based on these conditions:
+- color = D
+- clarity = VVS1
+
+Number of matching diamonds: 251
+
+Summary:
+Average price: $2897.16
+Minimum price: $425
+Maximum price: $17932
+Average carat: 0.48
+
+My interpretation:
+Based on the dataset, these diamonds have an average price of about $2897.16. The average carat is below 1, so these diamonds are generally smaller.
