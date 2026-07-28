@@ -1,0 +1,15 @@
+Question: what is the highest price?
+
+I did not find a specific cut, color, or clarity filter.
+So I used the full dataset.
+
+Number of matching diamonds: 53920
+
+Summary:
+Average price: $3930.99
+Minimum price: $326
+Maximum price: $18823
+Average carat: 0.8
+
+My interpretation:
+Based on the dataset, these diamonds have an average price of about $3930.99. The average carat is below 1, so these diamonds are generally smaller.
