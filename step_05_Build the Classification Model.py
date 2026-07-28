@@ -99,22 +99,13 @@ model.add(Dense(32, activation="relu"))
 model.add(Dense(number_of_classes, activation="softmax"))
 
 
-model.compile(
-    optimizer="adam",
-    loss="sparse_categorical_crossentropy",
-    metrics=["accuracy"])
+model.compile(optimizer="adam", loss="sparse_categorical_crossentropy", metrics=["accuracy"])
 
 
 
 # 5. Train the model
 
-history = model.fit(
-    X_train,
-    y_train,
-    epochs=100,
-    batch_size=32,
-    validation_split=0.2,
-    verbose=1)
+history = model.fit(X_train, y_train, epochs=100, batch_size=32, validation_split=0.2, verbose=1)
 
 
 
@@ -131,23 +122,11 @@ y_pred = np.argmax(y_pred_prob, axis=1)
 
 accuracy = accuracy_score(y_test, y_pred)
 
-precision = precision_score(
-    y_test,
-    y_pred,
-    average="weighted",
-    zero_division=0)
+precision = precision_score(y_test, y_pred, average="weighted", zero_division=0)
 
-recall = recall_score(
-    y_test,
-    y_pred,
-    average="weighted",
-    zero_division=0)
+recall = recall_score(y_test, y_pred, average="weighted", zero_division=0)
 
-f1 = f1_score(
-    y_test,
-    y_pred,
-    average="weighted",
-    zero_division=0)
+f1 = f1_score(y_test, y_pred, average="weighted", zero_division=0)
 
 print("\nModel Evaluation Results")
 print("Accuracy:", accuracy)
@@ -160,65 +139,41 @@ print("F1-score:", f1)
 # 8. Save evaluation results
 
 
-metrics_table = pd.DataFrame({
-    "Metric": ["Accuracy", "Precision", "Recall", "F1-score"],
-    "Score": [accuracy, precision, recall, f1]})
+metrics_table = pd.DataFrame({"Metric": ["Accuracy", "Precision", "Recall", "F1-score"], "Score": [accuracy, precision, recall, f1]})
 
-metrics_table.to_csv(
-    os.path.join(output_folder, "classification_metrics.csv"),
-    index=False)
+metrics_table.to_csv(os.path.join(output_folder, "classification_metrics.csv"), index=False)
 
 
 class_names = clarity_mapping["clarity"].tolist()
 
-class_report = classification_report(
-    y_test,
-    y_pred,
-    labels=list(range(number_of_classes)),
-    target_names=class_names,
+class_report = classification_report(y_test, y_pred, labels=list(range(number_of_classes)), target_names=class_names,
     zero_division=0)
 
-with open(
-    os.path.join(output_folder, "classification_report.txt"),
-    "w",
-    encoding="utf-8") as file:
+with open(os.path.join(output_folder, "classification_report.txt"), "w", encoding="utf-8") as file:
     file.write(class_report)
 
 
-conf_matrix = confusion_matrix(
-    y_test,
-    y_pred,
-    labels=list(range(number_of_classes)))
+conf_matrix = confusion_matrix(y_test, y_pred, labels=list(range(number_of_classes)))
 
-confusion_matrix_table = pd.DataFrame(
-    conf_matrix,
-    index=class_names,
-    columns=class_names)
+confusion_matrix_table = pd.DataFrame(conf_matrix, index=class_names, columns=class_names)
 
-confusion_matrix_table.to_csv(
-    os.path.join(output_folder, "confusion_matrix.csv"))
+confusion_matrix_table.to_csv(os.path.join(output_folder, "confusion_matrix.csv"))
 
 
 
 # 9. Save predictions
 
 
-encoded_to_clarity = dict(
-    zip(
-        clarity_mapping["clarity_encoded"],
-        clarity_mapping["clarity"]))
+encoded_to_clarity = dict(zip(clarity_mapping["clarity_encoded"], clarity_mapping["clarity"]))
 
 actual_clarity = y_test.map(encoded_to_clarity)
 predicted_clarity = pd.Series(y_pred).map(encoded_to_clarity)
 
-predictions = pd.DataFrame({
-    "actual_clarity_encoded": y_test.values,
-    "predicted_clarity_encoded": y_pred,
+predictions = pd.DataFrame({"actual_clarity_encoded": y_test.values, "predicted_clarity_encoded": y_pred,
     "actual_clarity": actual_clarity.values,
     "predicted_clarity": predicted_clarity.values})
 
-predictions.to_csv(
-    os.path.join(output_folder, "classification_predictions.csv"),
+predictions.to_csv(os.path.join(output_folder, "classification_predictions.csv"),
     index=False)
 
 
@@ -228,9 +183,7 @@ predictions.to_csv(
 
 history_table = pd.DataFrame(history.history)
 
-history_table.to_csv(
-    os.path.join(output_folder, "training_history.csv"),
-    index=False)
+history_table.to_csv(os.path.join(output_folder, "training_history.csv"), index=False)
 
 
 
@@ -268,10 +221,7 @@ plt.close()
 # Plot classification metrics
 
 plt.figure(figsize=(8, 5))
-sns.barplot(
-    x="Metric",
-    y="Score",
-    data=metrics_table)
+sns.barplot(x="Metric", y="Score", data=metrics_table)
 plt.title("Classification Model Metrics")
 plt.xlabel("Metric")
 plt.ylabel("Score")
@@ -284,10 +234,7 @@ plt.close()
 # Plot confusion matrix
 
 plt.figure(figsize=(9, 7))
-sns.heatmap(
-    confusion_matrix_table,
-    annot=True,
-    fmt="d")
+sns.heatmap(confusion_matrix_table, annot=True, fmt="d")
 plt.title("Confusion Matrix")
 plt.xlabel("Predicted Clarity")
 plt.ylabel("Actual Clarity")
@@ -301,9 +248,7 @@ plt.close()
 actual_counts = predictions["actual_clarity"].value_counts().sort_index()
 predicted_counts = predictions["predicted_clarity"].value_counts().sort_index()
 
-actual_predicted_counts = pd.DataFrame({
-    "Actual": actual_counts,
-    "Predicted": predicted_counts})
+actual_predicted_counts = pd.DataFrame({"Actual": actual_counts, "Predicted": predicted_counts})
 
 actual_predicted_counts = actual_predicted_counts.fillna(0)
 
